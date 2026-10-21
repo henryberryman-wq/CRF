@@ -3,13 +3,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>College Run Farms | Pumpkin Counter</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -21,19 +19,16 @@ body {
 header {
   background: #294a35;
   color: white;
-  padding: 25px 15px;
   text-align: center;
+  padding: 25px 15px;
 }
 
 header h1 {
-  font-family: Georgia, serif;
-  font-size: 31px;
+  font: bold 30px Georgia, serif;
   margin: 8px 0;
 }
 
-header p {
-  margin: 5px;
-}
+header p { margin: 5px; }
 
 main {
   max-width: 800px;
@@ -41,25 +36,20 @@ main {
   padding: 16px;
 }
 
-.screen {
-  display: none;
-}
-
-.screen.active {
-  display: block;
-}
+.screen { display: none; }
+.screen.active { display: block; }
 
 .intro {
   text-align: center;
   line-height: 1.6;
-  margin: 12px 0 23px;
+  margin-bottom: 22px;
 }
 
 .section {
   background: white;
   border: 1px solid #ded7ca;
   border-radius: 12px;
-  margin-bottom: 17px;
+  margin-bottom: 16px;
   overflow: hidden;
 }
 
@@ -72,9 +62,8 @@ main {
 }
 
 .section-header h2 {
-  font-family: Georgia, serif;
+  font: bold 22px Georgia, serif;
   color: #294a35;
-  font-size: 22px;
   margin: 0;
 }
 
@@ -84,32 +73,27 @@ main {
 }
 
 .item {
-  padding: 16px;
-  border-top: 1px solid #eeeeee;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 16px;
   gap: 12px;
+  border-top: 1px solid #eee;
 }
 
-.item-info {
-  flex: 1;
-}
-
-.item-name {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+.item-info { flex: 1; }
+.item-name { font-weight: bold; }
 
 .item-description {
-  color: #666;
   font-size: 13px;
+  color: #666;
   line-height: 1.5;
+  margin-top: 5px;
 }
 
 .item-price {
-  font-weight: bold;
   color: #b65b24;
+  font-weight: bold;
   margin-top: 8px;
 }
 
@@ -128,6 +112,7 @@ main {
   color: white;
   font-size: 25px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .counter button.minus {
@@ -137,7 +122,6 @@ main {
 
 .counter button:disabled {
   opacity: 0.4;
-  cursor: not-allowed;
 }
 
 .quantity {
@@ -162,12 +146,11 @@ main {
 
 .customer-box label {
   display: block;
-  margin-bottom: 8px;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .customer-box input {
-  display: block;
   width: 100%;
   font-size: 16px;
   padding: 12px;
@@ -177,13 +160,15 @@ main {
 }
 
 .bottom-bar {
-  position: sticky;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  width: 100%;
   background: white;
-  padding: 15px;
+  padding: 12px 15px;
   border-top: 2px solid #ddd5c7;
   box-shadow: 0 -3px 12px #0002;
-  margin: 20px -16px -16px;
+  z-index: 1000;
 }
 
 .bottom-content {
@@ -191,110 +176,100 @@ main {
   margin: auto;
 }
 
+#selectionPage {
+  padding-bottom: 145px;
+}
+
 .total-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 }
 
 .total-price {
-  color: #294a35;
   font-size: 29px;
   font-weight: bold;
+  color: #294a35;
+}
+
+.primary-button,
+.secondary-button,
+.paypal-button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 9px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .primary-button {
-  display: block;
-  width: 100%;
   background: #294a35;
   color: white;
-  padding: 17px;
-  font-size: 17px;
-  font-weight: bold;
   border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  text-align: center;
 }
 
 .secondary-button {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  border: 1px solid #294a35;
-  border-radius: 9px;
   background: white;
   color: #294a35;
-  cursor: pointer;
+  border: 1px solid #294a35;
 }
 
-.action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-top: 15px;
+.paypal-button {
+  background: #0070ba;
+  color: white;
+  border: none;
+  margin-top: 12px;
 }
 
 .receipt-card {
   background: white;
   padding: 25px 20px;
-  margin: 20px 0;
+  margin: 15px 0;
   border: 1px solid #ddd7cc;
   border-radius: 12px;
 }
 
 .receipt-title {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 .receipt-title h2 {
-  font-family: Georgia, serif;
-  font-size: 28px;
+  font: bold 28px Georgia, serif;
   color: #294a35;
   margin: 5px;
 }
 
-.receipt-title p {
-  color: #666;
-  margin: 6px;
-}
-
 .receipt-info {
   padding: 12px 0;
-  line-height: 1.8;
   font-size: 14px;
+  line-height: 1.8;
   border-bottom: 1px dashed #aaa;
 }
 
-.receipt-section {
-  margin-top: 20px;
-}
+.receipt-section { margin-top: 20px; }
 
 .receipt-section h3 {
-  color: #294a35;
   background: #e9efe5;
+  color: #294a35;
   padding: 9px;
   font-size: 17px;
-  margin-bottom: 10px;
 }
 
 .receipt-item {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 10px;
   padding: 10px 2px;
   border-bottom: 1px solid #eee;
 }
 
-.receipt-item-name {
-  font-weight: bold;
-  line-height: 1.4;
-}
+.receipt-item-name { font-weight: bold; }
 
 .receipt-item-detail {
   font-size: 13px;
@@ -326,50 +301,77 @@ main {
   margin: 0;
 }
 
+.payment-section {
+  margin-top: 25px;
+  padding: 20px;
+  background: #fff5e7;
+  border: 1px solid #e3d2bb;
+  border-radius: 12px;
+}
+
+.payment-section h3 {
+  color: #294a35;
+  text-align: center;
+  margin-top: 0;
+}
+
+.payment-option {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 15px;
+}
+
+.payment-option h4 {
+  margin: 0 0 8px;
+  color: #294a35;
+  font-size: 17px;
+}
+
+.payment-option p {
+  line-height: 1.6;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.payment-note {
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
 .receipt-footer {
   text-align: center;
   padding-top: 25px;
   line-height: 1.6;
 }
 
-.receipt-footer h3 {
-  color: #294a35;
+.receipt-footer h3 { color: #294a35; }
+
+.receipt-actions {
+  margin: 20px 0 35px;
 }
 
-.payment-note {
-  background: #fff5e7;
-  border: 1px solid #e3d2bb;
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  line-height: 1.5;
-  margin: 15px 0;
-}
-
-.notice {
-  text-align: center;
-  color: #666;
-  font-size: 13px;
-  margin: 12px 0;
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 @media (max-width: 520px) {
-  header h1 {
-    font-size: 28px;
-  }
+  header h1 { font-size: 27px; }
 
   .item {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .counter {
-    align-self: flex-end;
-  }
+  .counter { align-self: flex-end; }
 
-  .receipt-card {
-    padding: 18px 13px;
-  }
+  .receipt-card { padding: 18px 13px; }
 
   .action-buttons {
     grid-template-columns: 1fr;
@@ -377,19 +379,16 @@ main {
 }
 
 @media print {
-  body {
-    background: white;
-  }
+  body { background: white; }
 
   header,
   #selectionPage,
-  .receipt-actions {
+  .receipt-actions,
+  .paypal-button {
     display: none !important;
   }
 
-  #receiptPage {
-    display: block !important;
-  }
+  #receiptPage { display: block !important; }
 
   main {
     max-width: 100%;
@@ -402,10 +401,7 @@ main {
     padding: 0;
   }
 
-  .receipt-section {
-    break-inside: avoid;
-  }
-
+  .receipt-section,
   .receipt-total-box {
     break-inside: avoid;
   }
@@ -423,7 +419,7 @@ main {
 
 <main>
 
-<!-- SCREEN ONE: PUMPKIN SELECTION -->
+<!-- PAGE 1: PUMPKIN SELECTION -->
 
 <div id="selectionPage" class="screen active">
 
@@ -431,8 +427,8 @@ main {
     <h2>Pick Your Pumpkins!</h2>
     <p>
       Find the section where you picked your pumpkins.
-      Use the + and − buttons to select how many you
-      picked. Your total will be calculated automatically!
+      Use the + and − buttons to enter your quantities.
+      Your total will calculate automatically!
     </p>
   </div>
 
@@ -444,7 +440,6 @@ main {
     <label for="customerName">
       Name (optional)
     </label>
-
     <input
       type="text"
       id="customerName"
@@ -454,22 +449,11 @@ main {
     <label for="customerNotes">
       Additional Notes (optional)
     </label>
-
     <input
       type="text"
       id="customerNotes"
-      placeholder="Any additional information"
+      placeholder="Additional information"
     >
-  </div>
-
-  <div class="payment-note">
-    <h3>College Run Farms Honor System</h3>
-    <p>
-      If you don't need anything in the farm store,
-      feel free to use our honor system. Tally your
-      pumpkins and pay using our usual payment method.
-    </p>
-    <b>Thank you for supporting our farm!</b>
   </div>
 
   <div class="bottom-bar">
@@ -477,9 +461,8 @@ main {
 
       <div class="total-row">
         <span>
-          <b id="totalQuantity">0</b> pumpkins selected
+          <b id="totalQuantity">0</b> items selected
         </span>
-
         <span class="total-price" id="runningTotal">
           $0.00
         </span>
@@ -498,15 +481,15 @@ main {
 </div>
 
 
-<!-- SCREEN TWO: RECEIPT -->
+<!-- PAGE 2: RECEIPT -->
 
 <div id="receiptPage" class="screen">
 
-  <div class="receipt-card" id="receipt">
+  <div class="receipt-card">
 
     <div class="receipt-title">
       <h2>🎃 College Run Farms</h2>
-      <p>Pumpkin Purchase Receipt</p>
+      <p>Pumpkin Purchase Summary</p>
     </div>
 
     <div class="receipt-info">
@@ -522,25 +505,77 @@ main {
       <p id="receiptQuantity"></p>
     </div>
 
-    <div class="payment-note">
-      <h3>Payment Information</h3>
-      <p>
-        Please complete your payment using
-        College Run Farms' accepted payment methods.
+    <!-- PAYMENT INFORMATION -->
+
+    <div class="payment-section">
+
+      <h3>How Would You Like to Pay?</h3>
+
+      <div class="payment-option">
+        <h4>🏡 Option 1: Pay at the Farm Store</h4>
+
+        <p>
+          Bring this receipt to our farm store
+          to check out and pay in person!
+        </p>
+
+        <p>
+          While you're there, you can also
+          purchase delicious ice cream and
+          tickets for our corn maze!
+        </p>
+
+        <p>
+          Our staff will be happy to help you
+          complete your purchase.
+        </p>
+      </div>
+
+      <div class="payment-option">
+        <h4>💳 Option 2: Pay Online with PayPal</h4>
+
+        <p>
+          Prefer to pay online? Use the button
+          below to complete your pumpkin
+          purchase through PayPal.
+        </p>
+
+        <p>
+          <b>Your pumpkin total:</b>
+          <span id="paypalAmount">$0.00</span>
+        </p>
+
+        <a
+          class="paypal-button"
+          href="https://www.paypal.com/ncp/payment/PS2RSG7RBM5QU"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pay Online with PayPal →
+        </a>
+
+        <p class="payment-note">
+          PayPal will open in a new tab.
+          Please verify or enter your correct
+          total on the PayPal checkout page.
+        </p>
+      </div>
+
+      <p class="payment-note">
+        This receipt is a purchase summary
+        and does not confirm payment.
       </p>
-      <p>
-        This is a purchase tally, not confirmation
-        that payment has been received.
-      </p>
+
     </div>
 
-    <div id="receiptNotes"></div>
+    <p id="receiptNotes"></p>
 
     <div class="receipt-footer">
-      <h3>Thank You!</h3>
+      <h3>Thank You for Visiting!</h3>
       <p>
-        Thank you for visiting College Run Farms!
-        We hope you enjoyed your time at the pumpkin patch.
+        Thank you for supporting College Run Farms!
+        We hope you enjoyed your time at
+        the pumpkin patch.
       </p>
       <b>Happy Fall! 🎃</b>
     </div>
@@ -574,11 +609,6 @@ main {
 
     </div>
 
-    <p class="notice">
-      You can take a screenshot of this receipt
-      or use Print / Save Receipt to save a PDF.
-    </p>
-
   </div>
 
 </div>
@@ -587,7 +617,7 @@ main {
 
 <script>
 
-// ALL NINE PUMPKIN SECTIONS
+// PUMPKIN CATEGORIES
 
 const sections = [
   {
@@ -717,8 +747,6 @@ const sections = [
   }
 ];
 
-// STORE PUMPKIN COUNTS
-
 const quantities = sections.map(section =>
   section.items.map(() => 0)
 );
@@ -727,15 +755,16 @@ function formatMoney(amount) {
   return "$" + amount.toFixed(2);
 }
 
-// CREATE PUMPKIN SECTIONS
+// BUILD PUMPKIN LIST
 
 function renderSections() {
+
   const container =
     document.getElementById("pumpkinSections");
 
   container.innerHTML = "";
 
-  sections.forEach((section, sectionIndex) => {
+  sections.forEach((section, si) => {
 
     const card = document.createElement("div");
     card.className = "section";
@@ -749,15 +778,14 @@ function renderSections() {
     const count = document.createElement("span");
     count.className = "section-count";
 
-    const sectionTotal = quantities[sectionIndex]
-      .reduce((sum, value) => sum + value, 0);
+    count.textContent =
+      quantities[si].reduce((a,b) => a+b,0) +
+      " picked";
 
-    count.textContent = sectionTotal + " picked";
-
-    heading.append(title, count);
+    heading.append(title,count);
     card.appendChild(heading);
 
-    section.items.forEach((item, itemIndex) => {
+    section.items.forEach((item,ii) => {
 
       const row = document.createElement("div");
       row.className = "item";
@@ -775,11 +803,12 @@ function renderSections() {
 
       const price = document.createElement("div");
       price.className = "item-price";
-      price.textContent = formatMoney(item.price) + " each";
+      price.textContent =
+        formatMoney(item.price) + " each";
 
       info.appendChild(name);
 
-      if (item.description) {
+      if(item.description) {
         info.appendChild(description);
       }
 
@@ -789,59 +818,44 @@ function renderSections() {
       counter.className = "counter";
 
       const minus = document.createElement("button");
+      minus.type = "button";
       minus.className = "minus";
       minus.textContent = "−";
-      minus.type = "button";
-      minus.disabled =
-        quantities[sectionIndex][itemIndex] === 0;
+      minus.disabled = quantities[si][ii] === 0;
+      minus.setAttribute("aria-label", "Remove " + item.name);
 
       const number = document.createElement("span");
       number.className = "quantity";
-      number.textContent =
-        quantities[sectionIndex][itemIndex];
+      number.textContent = quantities[si][ii];
 
       const plus = document.createElement("button");
-      plus.textContent = "+";
       plus.type = "button";
+      plus.textContent = "+";
+      plus.setAttribute("aria-label", "Add " + item.name);
 
-      minus.setAttribute(
-        "aria-label", "Remove one " + item.name
-      );
+      minus.onclick = () => changeQuantity(si,ii,-1);
+      plus.onclick = () => changeQuantity(si,ii,1);
 
-      plus.setAttribute(
-        "aria-label", "Add one " + item.name
-      );
-
-      minus.onclick = function() {
-        changeQuantity(sectionIndex, itemIndex, -1);
-      };
-
-      plus.onclick = function() {
-        changeQuantity(sectionIndex, itemIndex, 1);
-      };
-
-      counter.append(minus, number, plus);
-
-      row.append(info, counter);
-
+      counter.append(minus,number,plus);
+      row.append(info,counter);
       card.appendChild(row);
+
     });
 
     container.appendChild(card);
+
   });
 
   updateRunningTotal();
 }
 
-// ADD OR REMOVE PUMPKINS
+// COUNTER CONTROLS
 
-function changeQuantity(sectionIndex, itemIndex, change) {
-
-  const previous =
-    quantities[sectionIndex][itemIndex];
-
-  quantities[sectionIndex][itemIndex] =
-    Math.max(0, Math.min(9999, previous + change));
+function changeQuantity(si,ii,change) {
+  quantities[si][ii] = Math.max(
+    0,
+    Math.min(9999, quantities[si][ii] + change)
+  );
 
   renderSections();
 }
@@ -850,62 +864,53 @@ function changeQuantity(sectionIndex, itemIndex, change) {
 
 function calculateTotals() {
 
-  let totalItems = 0;
-  let totalCents = 0;
+  let count = 0;
+  let cents = 0;
 
-  sections.forEach((section, sectionIndex) => {
+  sections.forEach((section,si) => {
+    section.items.forEach((item,ii) => {
+      const qty = quantities[si][ii];
 
-    section.items.forEach((item, itemIndex) => {
-
-      const quantity =
-        quantities[sectionIndex][itemIndex];
-
-      totalItems += quantity;
-
-      totalCents +=
-        Math.round(item.price * 100) * quantity;
-
+      count += qty;
+      cents += Math.round(item.price * 100) * qty;
     });
-
   });
 
   return {
-    items: totalItems,
-    price: totalCents / 100
+    count: count,
+    total: cents / 100
   };
 }
-
-// UPDATE BOTTOM TOTAL
 
 function updateRunningTotal() {
 
   const totals = calculateTotals();
 
   document.getElementById("totalQuantity")
-    .textContent = totals.items;
+    .textContent = totals.count;
 
   document.getElementById("runningTotal")
-    .textContent = formatMoney(totals.price);
+    .textContent = formatMoney(totals.total);
 }
 
-// CHANGE BETWEEN SCREENS
+// SWITCH PAGES
 
-function setScreen(screenID) {
+function switchScreen(page) {
 
   document.querySelectorAll(".screen").forEach(
     screen => screen.classList.remove("active")
   );
 
-  document.getElementById(screenID)
+  document.getElementById(page)
     .classList.add("active");
 
   document.getElementById("headerSubtitle")
     .textContent =
-    screenID === "receiptPage"
+    page === "receiptPage"
       ? "Your Pumpkin Receipt"
       : "Pumpkin Picking Tally Sheet";
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
 // CREATE RECEIPT
@@ -914,42 +919,42 @@ function showReceipt() {
 
   const totals = calculateTotals();
 
-  if (totals.items === 0) {
-    alert("Please select at least one pumpkin first!");
+  if(totals.count === 0) {
+    alert("Please select at least one pumpkin!");
     return;
   }
 
-  const receiptContainer =
+  const receipt =
     document.getElementById("receiptItems");
 
-  receiptContainer.innerHTML = "";
+  receipt.innerHTML = "";
 
-  const customerName =
-    document.getElementById("customerName").value.trim();
+  const customer =
+    document.getElementById("customerName")
+    .value.trim();
 
-  const customerNotes =
-    document.getElementById("customerNotes").value.trim();
+  const notes =
+    document.getElementById("customerNotes")
+    .value.trim();
 
   document.getElementById("receiptDate")
     .textContent =
-    "Date: " + new Date().toLocaleString();
+      "Date: " + new Date().toLocaleString();
 
   document.getElementById("receiptCustomer")
     .textContent =
-    customerName ? "Customer: " + customerName : "";
+      customer ? "Customer: " + customer : "";
 
-  sections.forEach((section, sectionIndex) => {
+  sections.forEach((section,si) => {
 
     const selected = section.items
-      .map((item, itemIndex) => ({
+      .map((item,ii) => ({
         item: item,
-        quantity: quantities[sectionIndex][itemIndex]
+        qty: quantities[si][ii]
       }))
-      .filter(entry => entry.quantity > 0);
+      .filter(entry => entry.qty > 0);
 
-    if (selected.length === 0) {
-      return;
-    }
+    if(selected.length === 0) return;
 
     const sectionDiv = document.createElement("div");
     sectionDiv.className = "receipt-section";
@@ -961,83 +966,79 @@ function showReceipt() {
 
     selected.forEach(entry => {
 
-      const receiptRow = document.createElement("div");
-      receiptRow.className = "receipt-item";
+      const row = document.createElement("div");
+      row.className = "receipt-item";
 
       const left = document.createElement("div");
 
-      const itemName = document.createElement("div");
-      itemName.className = "receipt-item-name";
-      itemName.textContent = entry.item.name;
+      const name = document.createElement("div");
+      name.className = "receipt-item-name";
+      name.textContent = entry.item.name;
 
-      const itemDetails = document.createElement("div");
-      itemDetails.className = "receipt-item-detail";
-      itemDetails.textContent =
-        entry.quantity + " × " +
+      const detail = document.createElement("div");
+      detail.className = "receipt-item-detail";
+      detail.textContent =
+        entry.qty + " × " +
         formatMoney(entry.item.price);
 
-      left.append(itemName, itemDetails);
+      left.append(name,detail);
 
       const right = document.createElement("div");
       right.className = "receipt-item-total";
+
       right.textContent =
-        formatMoney(entry.quantity * entry.item.price);
+        formatMoney(entry.qty * entry.item.price);
 
-      receiptRow.append(left, right);
+      row.append(left,right);
+      sectionDiv.appendChild(row);
 
-      sectionDiv.appendChild(receiptRow);
     });
 
-    receiptContainer.appendChild(sectionDiv);
+    receipt.appendChild(sectionDiv);
+
   });
 
   document.getElementById("receiptTotal")
-    .textContent = formatMoney(totals.price);
+    .textContent = formatMoney(totals.total);
 
   document.getElementById("receiptQuantity")
     .textContent =
-    totals.items + " total item(s) selected";
+    totals.count + " total item(s) selected";
 
-  const notesElement =
-    document.getElementById("receiptNotes");
+  document.getElementById("paypalAmount")
+    .textContent = formatMoney(totals.total);
 
-  notesElement.textContent =
-    customerNotes ? "Notes: " + customerNotes : "";
+  document.getElementById("receiptNotes")
+    .textContent =
+    notes ? "Notes: " + notes : "";
 
-  setScreen("receiptPage");
+  switchScreen("receiptPage");
 }
 
-// RETURN TO PUMPKIN SELECTION
+// EDIT OR RESET
 
 function editPumpkins() {
-  setScreen("selectionPage");
+  switchScreen("selectionPage");
 }
-
-// START NEW PURCHASE
 
 function startOver() {
 
-  const confirmed = confirm(
-    "Start a new selection? This will erase your current pumpkin counts."
-  );
-
-  if (!confirmed) {
+  if(!confirm(
+    "Start over? This will clear your pumpkin selections."
+  )) {
     return;
   }
 
-  quantities.forEach(section => {
-    section.fill(0);
-  });
+  quantities.forEach(section => section.fill(0));
 
   document.getElementById("customerName").value = "";
   document.getElementById("customerNotes").value = "";
 
   renderSections();
-
-  setScreen("selectionPage");
+  switchScreen("selectionPage");
 }
 
-// LOAD WEBSITE
+// INITIALIZE
 
 renderSections();
 
