@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>College Run Farms | Pumpkin Tally</title>
+<style>
+:root{--green:#294a35;--orange:#b85b25;--cream:#fcf8f0;--line:#ded8c9;--ink:#23251f}
+*{box-sizing:border-box}body{margin:0;background:#f2eee5;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.45}
+header{background:var(--green);color:#fff;padding:30px 16px;text-align:center}header .eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:12px;font-weight:700;opacity:.85}h1{font-family:Georgia,serif;font-size:clamp(30px,6vw,44px);margin:5px 0}header p{margin:6px 0;color:#e8ecdf}
+main{max-width:860px;margin:0 auto;padding:18px 14px 170px}.intro{padding:16px;background:#fff;border:1px solid var(--line);border-radius:13px;margin-bottom:18px}.intro p{margin:0}.section{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 9px #00000008}.section-title{padding:14px 17px;background:var(--cream);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}.section h2{font-family:Georgia,serif;margin:0;font-size:22px;color:var(--green)}.section-count{font-size:12px;background:#e5eadf;border-radius:99px;padding:5px 10px;white-space:nowrap;font-weight:700;color:var(--green)}.item{padding:16px 17px;border-bottom:1px solid #eee9df;display:flex;justify-content:space-between;align-items:center;gap:15px}.item:last-child{border-bottom:0}.info{flex:1;min-width:0}.item-name{font-weight:750;font-size:16px}.desc{color:#67695f;font-size:13px;margin:3px 0 0}.price{color:var(--orange);font-weight:800;font-size:15px;margin-top:4px}.counter{display:flex;align-items:center;gap:8px;flex-shrink:0}.count{width:28px;text-align:center;font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}.counter button{width:42px;height:42px;border:1px solid #c6c9bc;background:#f7faf4;color:var(--green);font-size:25px;font-weight:500;border-radius:10px;cursor:pointer;touch-action:manipulation}.counter button:active{transform:scale(.94)}.counter button:focus-visible,.action:focus-visible{outline:3px solid #d88141;outline-offset:2px}.counter button.minus{background:#fff;color:#444}.counter button:disabled{opacity:.3;cursor:not-allowed}.receipt-info{padding:17px;background:#fff;border:1px solid var(--line);border-radius:14px;margin-top:20px}.receipt-info h2{font-family:Georgia,serif;color:var(--green);margin:0 0 9px}.receipt-info label{font-size:14px;display:block;font-weight:650}.receipt-info input{width:100%;padding:11px;border:1px solid #d5d0c6;border-radius:9px;font:inherit;margin:4px 0 12px}.muted{font-size:13px;color:#606258}.bottom{position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -5px 25px #0000001c;border-top:1px solid var(--line);padding:11px 14px max(12px,env(safe-area-inset-bottom))}.bottom-inner{max-width:860px;margin:0 auto}.totals{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.totals span{font-size:14px;color:#4f544c}.totals strong{font-size:29px;color:var(--green);font-variant-numeric:tabular-nums}.actions{display:flex;gap:8px;flex-wrap:wrap}.action{border:0;border-radius:9px;padding:12px 14px;font-weight:750;cursor:pointer;font:inherit;font-weight:750}.primary{background:var(--orange);color:#fff;flex:2}.secondary{background:#eaf0e7;color:var(--green);flex:1}.clear{background:#f2eae5;color:#814227;flex:1}.payment{margin:18px 0;font-size:14px;text-align:center}.payment strong{color:var(--green)}.confirmation{font-size:13px;margin:5px 0;color:#686a60}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:500px){.item{align-items:flex-start;flex-direction:column;gap:9px}.counter{align-self:flex-end}.section-title{align-items:start}.action{font-size:13px;padding:12px 9px}main{padding-bottom:195px}}
+@media print{header{background:white;color:#111;padding:4px}header p,header .eyebrow,.intro,.counter,.bottom,.receipt-info,.payment{display:none!important}main{padding:0}.section{break-inside:avoid;box-shadow:none;margin:5px 0}.section-title{padding:5px 10px}.item{padding:6px 10px}.item:not(.chosen){display:none}.item .desc{font-size:11px}.price{color:#111}.section:not(.has-items){display:none}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">Welcome to the pumpkin patch</div><h1>College Run Farms</h1><p>Pick Your Pumpkins · Pumpkin Tally Sheet</p></header>
+<main><div class="intro"><p>🎃 Find the section where you picked your pumpkins, then tap <strong>+</strong> for each one. The total updates automatically. Use <strong>Download Receipt</strong> when you're finished.</p></div><div id="sections"></div>
+<section class="receipt-info"><h2>Receipt Details <span class="muted">(optional)</span></h2><label for="customer">Your name</label><input id="customer" placeholder="Name for the receipt" maxlength="80"><label for="notes">Notes</label><input id="notes" placeholder="Any notes about your pumpkins" maxlength="150"><p class="muted">Nothing is submitted to us from this page. Your tally stays on your device until you download or print it.</p></section>
+<div class="payment"><strong>Honor System</strong><p>If you don't need anything from the farm store, total up your pumpkin purchase and pay through the farm's usual PayPal method.</p><p>Thank you for visiting our farm! Happy Fall! 🍂</p></div></main>
+<div class="bottom"><div class="bottom-inner"><div class="totals"><span><span id="qty">0</span> items picked</span><strong id="total" aria-live="polite">$0.00</strong></div><div class="actions"><button type="button" id="download" class="action primary">⬇ Download Receipt</button><button type="button" id="print" class="action secondary">Print / PDF</button><button type="button" id="clear" class="action clear">Reset</button></div></div></div>
+<script>
+// Names and prices transcribed from the farm's physical tally sheet.
+const sections = [
+ {name:'Section 1',items:[
+  {name:'Small items',description:'Snowdrop · Ironside · Midnight',price:2},
+  {name:'Specialty pumpkins',description:'One Too Many Striped · Cinderella · Flat White Boer · Fairytales · Red Warty Thing',price:11.50}]},
+ {name:'Section 2',items:[
+  {name:'Specialty pumpkins',description:'Pink Dolls · Marina di Chioggia · Luminas · Jarrahdales · Warty Goblins · Lemonade · Long Island Cheese · Peanut',price:9},
+  {name:'Mini pumpkins & mini gourds',description:'Mini pumpkins · Mini gourds',price:1}]},
+ {name:'Section 3',items:[
+  {name:'Carving pumpkins',description:'Carving pumpkins',price:8},
+  {name:'Gourds & specialty varieties',description:'Large Gourds · Turks Turbans · Flatso · White Moonshine · Popcorns',price:3.50}]},
+ {name:'Section 4',items:[{name:'Jack-O-Lantern pumpkins',description:'',price:8}]},
+ {name:'Section 5',items:[{name:'Jack-O-Lantern pumpkins',description:'',price:8}]},
+ {name:'Section 6',items:[
+  {name:'Jack-O-Lantern pumpkins',description:'',price:8},
+  {name:'Squash & small specialty pumpkins',description:'Butternut & Acorn Squash · White Casperita · Lil’ Pumpkemon',price:1.50}]},
+ {name:'Section 7',items:[
+  {name:'Jack-O-Lantern & Striped Fireball pumpkins',description:'',price:8},
+  {name:'Atlantic Giant pumpkins',description:'',price:30}]},
+ {name:'Section 8',items:[
+  {name:'XL carving pumpkins',description:'',price:10},
+  {name:'Pie & specialty pumpkins',description:'Pie Pumpkins · Grizzly · Sanchez · Blanco Pumpkins',price:3.50}]},
+ {name:'Section 9',items:[
+  {name:'Giant pumpkins',description:'Atlantic Giants · Prizewinners · World of Color',price:30},
+  {name:'Gremlin gourds',description:'',price:2}]}
+];
+const currency=n=>'$'+n.toFixed(2);
+const values=sections.map(s=>s.items.map(()=>0));
+const root=document.getElementById('sections');
+function render(){
+ root.innerHTML='';sections.forEach((s,si)=>{
+  const section=document.createElement('section');section.className='section';
+  const count=values[si].reduce((a,b)=>a+b,0);if(count)section.classList.add('has-items');
+  const title=document.createElement('div');title.className='section-title';
+  const h=document.createElement('h2');h.textContent=s.name;
+  const badge=document.createElement('span');badge.className='section-count';badge.textContent=count+' picked';title.append(h,badge);section.append(title);
+  s.items.forEach((item,ii)=>{
+   const line=document.createElement('div');line.className='item'+(values[si][ii]?' chosen':'');
+   const info=document.createElement('div');info.className='info';
+   const n=document.createElement('div');n.className='item-name';n.textContent=item.name;
+   const d=document.createElement('p');d.className='desc';d.textContent=item.description;
+   const p=document.createElement('div');p.className='price';p.textContent=currency(item.price)+' each';info.append(n);if(item.description)info.append(d);info.append(p);
+   const counter=document.createElement('div');counter.className='counter';
+   const minus=document.createElement('button');minus.type='button';minus.className='minus';minus.textContent='−';minus.disabled=values[si][ii]===0;minus.setAttribute('aria-label','Remove one '+item.name+' from '+s.name);
+   const num=document.createElement('output');num.className='count';num.textContent=values[si][ii];num.setAttribute('aria-label','Quantity');
+   const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.setAttribute('aria-label','Add one '+item.name+' from '+s.name);
+   minus.addEventListener('click',()=>change(si,ii,-1));plus.addEventListener('click',()=>change(si,ii,1));
+   counter.append(minus,num,plus);line.append(info,counter);section.append(line);
+  });root.append(section);
+ });
+ let count=0,total=0;sections.forEach((s,si)=>s.items.forEach((it,ii)=>{count+=values[si][ii];total+=values[si][ii]*it.price}));
+ document.getElementById('qty').textContent=count;
+ document.getElementById('total').textContent=currency(total);
+}
+function change(si,ii,d){values[si][ii]=Math.max(0,Math.min(9999,values[si][ii]+d));render()}
+function lines(){
+ const date=new Date();const dateLabel=date.toLocaleString();
+ const person=document.getElementById('customer').value.trim();const notes=document.getElementById('notes').value.trim();
+ const list=['COLLEGE RUN FARMS','Pumpkin Picking Receipt','Date: '+dateLabel];if(person)list.push('Customer: '+person);list.push('---------------------------------------');
+ let count=0,total=0;sections.forEach((s,si)=>{let printed=false;s.items.forEach((it,ii)=>{let n=values[si][ii];if(!n)return;if(!printed){list.push(s.name);printed=true}count+=n;total+=n*it.price;list.push('  '+it.name,'    '+n+' x '+currency(it.price)+' = '+currency(n*it.price))})});
+ if(!count)list.push('No pumpkins selected');list.push('---------------------------------------','TOTAL ITEMS: '+count,'TOTAL DUE: '+currency(total));if(notes)list.push('Notes: '+notes);list.push('','Thank you for visiting College Run Farms!','Happy Fall!');return list;
+}
+function download(name,blob){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+// Generate a standalone PDF without requiring any external library or server.
+function downloadPDF(){
+ const input=lines(),out=[];const limit=44;
+ for(const line of input){if(line.length<=limit)out.push(line);else {let current=line;while(current.length>limit){let split=current.lastIndexOf(' ',limit);if(split<12)split=limit;out.push(current.slice(0,split));current='  '+current.slice(split).trimStart()}out.push(current)}}
+ const pageSize=44,pages=[];for(let i=0;i<out.length;i+=pageSize)pages.push(out.slice(i,i+pageSize));if(!pages.length)pages.push([]);
+ const ascii=s=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7e]/g,'?');
+ const pdfEscape=s=>ascii(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+ const objects=[null];const add=x=>{objects.push(x);return objects.length-1};
+ const catalog=add(''),pageTree=add('');const font=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');const bold=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');const pageIds=[];
+ pages.forEach((page)=>{
+  let commands='BT\n/F2 19 Tf\n50 740 Td\n('+pdfEscape('College Run Farms')+') Tj\nET\n';
+  page.forEach((line,i)=>{const y=704-i*15;const size=i===0?12:10;commands+='BT\n/F'+(i===0?'2':'1')+' '+size+' Tf\n50 '+y+' Td\n('+pdfEscape(line)+') Tj\nET\n'});
+  const content=add('<< /Length '+new TextEncoder().encode(commands).length+' >>\nstream\n'+commands+'endstream');
+  const pid=add('<< /Type /Page /Parent '+pageTree+' 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 '+font+' 0 R /F2 '+bold+' 0 R >> >> /Contents '+content+' 0 R >>');pageIds.push(pid);
+ });
+ objects[pageTree]='<< /Type /Pages /Kids ['+pageIds.map(n=>n+' 0 R').join(' ')+'] /Count '+pageIds.length+' >>';objects[catalog]='<< /Type /Catalog /Pages '+pageTree+' 0 R >>';
+ let body='%PDF-1.4\n';const offsets=[0];for(let i=1;i<objects.length;i++){offsets.push(body.length);body+=i+' 0 obj\n'+objects[i]+'\nendobj\n'}
+ const xref=body.length;body+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';for(let i=1;i<objects.length;i++)body+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';body+='trailer\n<< /Size '+objects.length+' /Root '+catalog+' 0 R >>\nstartxref\n'+xref+'\n%%EOF';
+ download('College-Run-Farms-Pumpkin-Receipt.pdf',new Blob([body],{type:'application/pdf'}));
+}
+document.getElementById('download').addEventListener('click',downloadPDF);
+document.getElementById('print').addEventListener('click',()=>{const sheet=window.open('','_blank');if(!sheet){alert('Allow popups to print a receipt, or use Download Receipt.');return}const safe=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));sheet.document.write('<!doctype html><html><head><title>College Run Farms Receipt</title><meta charset="utf-8"><style>body{font:15px/1.6 monospace;max-width:650px;margin:40px auto;padding:15px}h1{font-family:Georgia,serif}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><h1>🎃 College Run Farms</h1><pre>'+safe(lines().join('\n'))+'</pre></body></html>');sheet.document.close();sheet.focus();setTimeout(()=>sheet.print(),250)});
+document.getElementById('clear').addEventListener('click',()=>{if(!confirm('Clear all pumpkin counts and start over?'))return;values.forEach(v=>v.fill(0));document.getElementById('customer').value='';document.getElementById('notes').value='';render()});
+render();
+</script>
+</body></html>
